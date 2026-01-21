@@ -25,7 +25,7 @@ const AdminRegister = () => {
       setError("");
 
       const response = await fetch(
-        "http://localhost:8080/api/auth/register",
+        "https://online-banking-system.up.railway.app/api/auth/register",
         {
           method: "POST",
           headers: {
