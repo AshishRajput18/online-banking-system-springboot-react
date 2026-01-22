@@ -15,9 +15,15 @@ import org.springframework.web.cors.CorsConfigurationSource;
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final CorsConfigurationSource corsConfigurationSource;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+    // ✅ ONLY constructor fix (no logic change)
+    public SecurityConfig(
+            JwtAuthFilter jwtAuthFilter,
+            CorsConfigurationSource corsConfigurationSource
+    ) {
         this.jwtAuthFilter = jwtAuthFilter;
+        this.corsConfigurationSource = corsConfigurationSource;
     }
 
     @Bean
@@ -35,28 +41,25 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            .cors().and()
+            // ✅ THIS IS THE REAL FIX
+            .cors(cors -> cors.configurationSource(corsConfigurationSource))
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll() // Auth endpoints open
-                .requestMatchers("/api/admin/**").permitAll() // Only ADMIN can access
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/admin/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/customer/register").permitAll()
                 .requestMatchers("/api/bank/account/**").permitAll()
                 .requestMatchers("/api/customer/**").permitAll()
                 .requestMatchers("/api/transactions/**").permitAll()
                 .requestMatchers("/api/bank/**").permitAll()
-                 // ✅ VERY IMPORTANT FOR CORS
-            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                .requestMatchers("/api/admin/**").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers("/api/**").permitAll()
-                
                 .anyRequest().authenticated()
             );
 
-        // ✅ Add JWT filter
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
