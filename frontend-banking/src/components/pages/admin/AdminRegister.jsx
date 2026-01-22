@@ -25,7 +25,7 @@ const AdminRegister = () => {
       setError("");
 
       const response = await fetch(
-        "http://localhost:8080/api/auth/register",
+        "${process.env.REACT_APP_API_URL}/api/auth/register",
         {
           method: "POST",
           headers: {
