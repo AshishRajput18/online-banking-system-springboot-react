@@ -18,7 +18,7 @@ public class CorsConfig {
 
         // ✅ Use patterns (supports wildcard)
         config.setAllowedOriginPatterns(List.of(
-            "https://online-banking-system-springboot-react-ju3nmx18e.vercel.app/",
+            "https://*.vercel.app",
             "http://localhost:5173"
         ));
 
