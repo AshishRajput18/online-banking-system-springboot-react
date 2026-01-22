@@ -70,7 +70,7 @@ const AddBank = () => {
       // Prepare request payload
       const payload = { ...formData }; // Includes bankManagerId now
 
-      const res = await fetch("http://localhost:8080/api/admin/bank/add", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/bank/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
