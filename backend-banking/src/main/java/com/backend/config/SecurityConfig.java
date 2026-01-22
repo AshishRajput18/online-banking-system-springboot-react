@@ -47,6 +47,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/customer/**").permitAll()
                 .requestMatchers("/api/transactions/**").permitAll()
                 .requestMatchers("/api/bank/**").permitAll()
+                 // ✅ VERY IMPORTANT FOR CORS
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //                .requestMatchers("/api/admin/**").permitAll()
                 .requestMatchers("/api/**").permitAll()
                 
