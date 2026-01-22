@@ -31,6 +31,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             FilterChain filterChain)
             throws ServletException, IOException {
 
+        // ✅ VERY IMPORTANT: Allow CORS preflight requests
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
@@ -41,9 +47,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     && SecurityContextHolder.getContext().getAuthentication() == null) {
 
                 String email = jwtUtil.extractUsername(token);
-                String role = jwtUtil.extractRole(token); // BANK from DB/JWT
+                String role = jwtUtil.extractRole(token);
 
-                // 🔥 Convert BANK → ROLE_BANK
+                // Convert role to Spring Security format
                 String authorityRole = "ROLE_" + role;
 
                 SimpleGrantedAuthority authority =
@@ -51,8 +57,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
-                                email, // principal
-                                null, // credentials
+                                email,
+                                null,
                                 List.of(authority)
                         );
 
