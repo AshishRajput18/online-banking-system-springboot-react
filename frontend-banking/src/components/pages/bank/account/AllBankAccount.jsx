@@ -40,7 +40,7 @@ const AllBankAccount = () => {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/admin/accounts", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/accounts`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -67,7 +67,7 @@ const AllBankAccount = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:8080/api/customer/transactions?accountNumber=${acc.accountNumber}`,
+        `${import.meta.env.VITE_API_URL}/api/customer/transactions?accountNumber=${acc.accountNumber}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -101,7 +101,7 @@ const AllBankAccount = () => {
   const handleConfirmLock = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/admin/lock/${accountToLock.accountNumber}`,
+        `${import.meta.env.VITE_API_URL}/api/admin/lock/${accountToLock.accountNumber}`,
         {
           method: "PUT",
           headers: { Authorization: `Bearer ${token}` },
@@ -128,7 +128,7 @@ const AllBankAccount = () => {
   const handleUnlockAccount = async (acc) => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/admin/unlock/${acc.accountNumber}`,
+        `${import.meta.env.VITE_API_URL}/api/admin/unlock/${acc.accountNumber}`,
         {
           method: "PUT",
           headers: { Authorization: `Bearer ${token}` },

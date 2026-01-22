@@ -26,13 +26,13 @@ const CustomerBankAccountDetail = () => {
 
       try {
         const accountResponse = await axios.get(
-          `http://localhost:8080/api/customer/account/${accountNumber}`,
+          `${import.meta.env.VITE_API_URL}/api/customer/account/${accountNumber}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setAccountData(accountResponse.data);
 
         const txnResponse = await axios.get(
-          `http://localhost:8080/api/customer/transactions?accountNumber=${accountNumber}`,
+          `${import.meta.env.VITE_API_URL}/api/customer/transactions?accountNumber=${accountNumber}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setTransactions(txnResponse.data || []);

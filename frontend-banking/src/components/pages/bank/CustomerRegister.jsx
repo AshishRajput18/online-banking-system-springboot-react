@@ -43,7 +43,7 @@ const CustomerRegister = () => {
       }
 
       await axios.post(
-        "http://localhost:8080/api/customer/register",
+        `${import.meta.env.VITE_API_URL}/api/customer/register`,
         {
           ...formData,
           age: Number(formData.age),

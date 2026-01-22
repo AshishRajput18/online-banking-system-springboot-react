@@ -35,7 +35,7 @@ const AllBankAccounts = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const res = await fetch("http://localhost:8080/api/admin/accounts", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/accounts`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -82,7 +82,7 @@ const AllBankAccounts = () => {
       if (!token) throw new Error("No token found");
 
       const res = await fetch(
-        `http://localhost:8080/api/customer/transactions?accountNumber=${account.accountNo}`,
+        `${import.meta.env.VITE_API_URL}/api/customer/transactions?accountNumber=${account.accountNo}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

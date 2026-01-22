@@ -23,7 +23,7 @@ const AllCustomers = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:8080/api/customer/all", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/customer/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch customers");
@@ -47,7 +47,7 @@ const AllCustomers = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:8080/api/customer/delete?email=${email}`,
+        `${import.meta.env.VITE_API_URL}/api/customer/delete?email=${email}`,
         { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
       );
 

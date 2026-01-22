@@ -7,7 +7,7 @@ const AllBankManagers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/admin/bank/managers", {
+      .get(`${import.meta.env.VITE_API_URL}/api/admin/bank/managers`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

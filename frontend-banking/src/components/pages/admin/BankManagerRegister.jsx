@@ -46,7 +46,7 @@ const BankManagerRegister = () => {
       }
 
       const response = await fetch(
-        'http://localhost:8080/api/admin/bank-manager/register',
+        `${import.meta.env.VITE_API_URL}/api/admin/bank-manager/register`,
         {
           method: 'POST',
           headers: {

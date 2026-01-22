@@ -12,7 +12,7 @@ const AllBanks = () => {
         if (!token) throw new Error("Token missing");
 
         const response = await fetch(
-          "http://localhost:8080/api/admin/banks",
+          `${import.meta.env.VITE_API_URL}/api/admin/banks`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

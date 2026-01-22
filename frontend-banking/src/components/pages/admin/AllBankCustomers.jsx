@@ -36,7 +36,7 @@ const AllBankCustomers = () => {
       }
 
       try {
-        const res = await fetch("http://localhost:8080/api/admin/customers", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/customers`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -62,7 +62,7 @@ const AllBankCustomers = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:8080/api/customer/transactions?accountNumber=${customer.accountNo}`,
+        `${import.meta.env.VITE_API_URL}/api/customer/transactions?accountNumber=${customer.accountNo}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

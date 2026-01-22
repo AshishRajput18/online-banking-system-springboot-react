@@ -50,7 +50,7 @@ const AddBankAccount = () => {
 
         // 1️⃣ CHECK ACCOUNT EXISTS
         const existsRes = await fetch(
-          `http://localhost:8080/api/bank/account/exists?email=${customerEmail}`,
+          `${import.meta.env.VITE_API_URL}/api/bank/account/exists?email=${customerEmail}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const exists = await existsRes.json();
@@ -59,7 +59,7 @@ const AddBankAccount = () => {
         // 2️⃣ GET ACCOUNT STATUS
         if (exists) {
           const statusRes = await fetch(
-            `http://localhost:8080/api/bank/account/status?email=${customerEmail}`,
+            `${import.meta.env.VITE_API_URL}/api/bank/account/status?email=${customerEmail}`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
           const statusText = await statusRes.text();
@@ -70,7 +70,7 @@ const AddBankAccount = () => {
 
         // 3️⃣ FETCH CUSTOMER INFO
         const infoRes = await fetch(
-          `http://localhost:8080/api/bank/account/customer-info?email=${customerEmail}`,
+          `${import.meta.env.VITE_API_URL}/api/bank/account/customer-info?email=${customerEmail}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (!infoRes.ok) throw new Error();
@@ -98,7 +98,7 @@ const AddBankAccount = () => {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        "http://localhost:8080/api/bank/account/add",
+        `${import.meta.env.VITE_API_URL}/api/bank/account/add`,
         {
           method: "POST",
           headers: {

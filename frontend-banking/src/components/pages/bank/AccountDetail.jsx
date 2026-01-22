@@ -33,7 +33,7 @@ const AccountDetail = () => {
   const fetchAccount = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/bank/account/detail?email=${email}`,
+        `${import.meta.env.VITE_API_URL}/api/bank/account/detail?email=${email}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!res.ok) throw new Error("Account not found");
@@ -50,7 +50,7 @@ const AccountDetail = () => {
   const fetchTransactions = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/bank/account/transactions?email=${email}`,
+        `${import.meta.env.VITE_API_URL}/api/bank/account/transactions?email=${email}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = await res.json();
@@ -69,7 +69,7 @@ const AccountDetail = () => {
       return;
     }
 
-    await fetch("http://localhost:8080/api/bank/account/deposit", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/bank/account/deposit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const AccountDetail = () => {
       return;
     }
 
-    await fetch("http://localhost:8080/api/bank/account/withdraw", {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/bank/account/withdraw`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

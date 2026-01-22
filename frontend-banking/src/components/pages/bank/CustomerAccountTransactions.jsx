@@ -22,7 +22,7 @@ const BankTransactions = () => {
 
     const fetchBankTransactions = async () => {
       try {
-        const url = `http://localhost:8080/api/bank/transactions?bankId=${bankId}`;
+        const url = `${import.meta.env.VITE_API_URL}/api/bank/transactions?bankId=${bankId}`;
 
         const response = await fetch(url, {
           method: "GET",

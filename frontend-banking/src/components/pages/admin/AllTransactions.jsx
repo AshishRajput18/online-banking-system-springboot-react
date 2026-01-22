@@ -25,8 +25,8 @@ const AllTransactions = () => {
 
       const isSpecificAccount = acctNo.trim() !== "";
      const url = accountNo
-  ? `http://localhost:8080/api/customer/transactions?accountNumber=${accountNo}`
-  : `http://localhost:8080/api/customer/transactions`;
+  ? `${import.meta.env.VITE_API_URL}/api/customer/transactions?accountNumber=${accountNo}`
+  : `${import.meta.env.VITE_API_URL}/api/customer/transactions`;
        // all user transactions
 
       const res = await fetch(url, {

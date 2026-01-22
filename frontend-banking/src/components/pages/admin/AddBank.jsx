@@ -25,7 +25,7 @@ const AddBank = () => {
         if (!token) throw new Error("Token not found");
 
         const response = await fetch(
-          "http://localhost:8080/api/admin/bank-managers",
+          `${import.meta.env.VITE_API_URL}/api/admin/bank-managers`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -24,7 +24,7 @@ const CustomerAccountTransaction = () => {
       try {
         // 🔑 Using query param as per your working API
         const res = await fetch(
-          `http://localhost:8080/api/customer/transactions?accountNumber=${accountNumber}`,
+          `${import.meta.env.VITE_API_URL}/api/customer/transactions?accountNumber=${accountNumber}`,
           {
             method: "GET",
             headers: {
@@ -46,7 +46,7 @@ const CustomerAccountTransaction = () => {
 
         // Optionally fetch account info to update customerName dynamically
         const accountRes = await fetch(
-          `http://localhost:8080/api/customer/account/${accountNumber}`,
+          `${import.meta.env.VITE_API_URL}/api/customer/account/${accountNumber}`,
           {
             method: "GET",
             headers: {
